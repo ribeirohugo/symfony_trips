@@ -1,0 +1,4 @@
+# Cache, session files and logs (Symfony3)
+/var/*
+/.env
+/.env.test
