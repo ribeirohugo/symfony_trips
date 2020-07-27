@@ -6,3 +6,4 @@ twig:
     globals:
         project_title: '%env(TITLE)%'
         project_company: '%env(COMPANY)%'
+        home_path: '/trip/public'
