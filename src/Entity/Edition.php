@@ -38,5 +38,34 @@ class Edition
      */
     private $activity;
 
+    public function getId(): ?int
+    {
+        return $this->id;
+    }
+
+    public function getSemester(): ?string
+    {
+        return $this->semester;
+    }
+
+    public function setSemester(?string $semester): self
+    {
+        $this->semester = $semester;
+
+        return $this;
+    }
+
+    public function getActivity(): ?Activity
+    {
+        return $this->activity;
+    }
+
+    public function setActivity(?Activity $activity): self
+    {
+        $this->activity = $activity;
+
+        return $this;
+    }
+
 
 }

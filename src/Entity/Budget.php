@@ -38,5 +38,34 @@ class Budget
      */
     private $edition;
 
+    public function getId(): ?int
+    {
+        return $this->id;
+    }
+
+    public function getUrl(): ?string
+    {
+        return $this->url;
+    }
+
+    public function setUrl(?string $url): self
+    {
+        $this->url = $url;
+
+        return $this;
+    }
+
+    public function getEdition(): ?Edition
+    {
+        return $this->edition;
+    }
+
+    public function setEdition(?Edition $edition): self
+    {
+        $this->edition = $edition;
+
+        return $this;
+    }
+
 
 }

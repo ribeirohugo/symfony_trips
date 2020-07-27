@@ -49,5 +49,58 @@ class Activity
      */
     private $driveFiles;
 
+    public function getId(): ?int
+    {
+        return $this->id;
+    }
+
+    public function getName(): ?string
+    {
+        return $this->name;
+    }
+
+    public function setName(?string $name): self
+    {
+        $this->name = $name;
+
+        return $this;
+    }
+
+    public function getDescription(): ?string
+    {
+        return $this->description;
+    }
+
+    public function setDescription(?string $description): self
+    {
+        $this->description = $description;
+
+        return $this;
+    }
+
+    public function getTimestamp(): ?\DateTimeInterface
+    {
+        return $this->timestamp;
+    }
+
+    public function setTimestamp(?\DateTimeInterface $timestamp): self
+    {
+        $this->timestamp = $timestamp;
+
+        return $this;
+    }
+
+    public function getDriveFiles(): ?string
+    {
+        return $this->driveFiles;
+    }
+
+    public function setDriveFiles(?string $driveFiles): self
+    {
+        $this->driveFiles = $driveFiles;
+
+        return $this;
+    }
+
 
 }

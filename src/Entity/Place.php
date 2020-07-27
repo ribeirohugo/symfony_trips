@@ -131,5 +131,178 @@ class Place
      */
     private $placeType;
 
+    public function getId(): ?int
+    {
+        return $this->id;
+    }
+
+    public function getName(): ?string
+    {
+        return $this->name;
+    }
+
+    public function setName(?string $name): self
+    {
+        $this->name = $name;
+
+        return $this;
+    }
+
+    public function getDescription(): ?string
+    {
+        return $this->description;
+    }
+
+    public function setDescription(?string $description): self
+    {
+        $this->description = $description;
+
+        return $this;
+    }
+
+    public function getTimestamp(): ?\DateTimeInterface
+    {
+        return $this->timestamp;
+    }
+
+    public function setTimestamp(?\DateTimeInterface $timestamp): self
+    {
+        $this->timestamp = $timestamp;
+
+        return $this;
+    }
+
+    public function getLastPrice(): ?float
+    {
+        return $this->lastPrice;
+    }
+
+    public function setLastPrice(?float $lastPrice): self
+    {
+        $this->lastPrice = $lastPrice;
+
+        return $this;
+    }
+
+    public function getMainContact(): ?string
+    {
+        return $this->mainContact;
+    }
+
+    public function setMainContact(?string $mainContact): self
+    {
+        $this->mainContact = $mainContact;
+
+        return $this;
+    }
+
+    public function getPositivePoints(): ?string
+    {
+        return $this->positivePoints;
+    }
+
+    public function setPositivePoints(?string $positivePoints): self
+    {
+        $this->positivePoints = $positivePoints;
+
+        return $this;
+    }
+
+    public function getNegativePoints(): ?string
+    {
+        return $this->negativePoints;
+    }
+
+    public function setNegativePoints(?string $negativePoints): self
+    {
+        $this->negativePoints = $negativePoints;
+
+        return $this;
+    }
+
+    public function getAddress(): ?string
+    {
+        return $this->address;
+    }
+
+    public function setAddress(?string $address): self
+    {
+        $this->address = $address;
+
+        return $this;
+    }
+
+    public function getDriveFiles(): ?string
+    {
+        return $this->driveFiles;
+    }
+
+    public function setDriveFiles(?string $driveFiles): self
+    {
+        $this->driveFiles = $driveFiles;
+
+        return $this;
+    }
+
+    public function getStars(): ?string
+    {
+        return $this->stars;
+    }
+
+    public function setStars(?string $stars): self
+    {
+        $this->stars = $stars;
+
+        return $this;
+    }
+
+    public function getAttractionType(): ?AttractionType
+    {
+        return $this->attractionType;
+    }
+
+    public function setAttractionType(?AttractionType $attractionType): self
+    {
+        $this->attractionType = $attractionType;
+
+        return $this;
+    }
+
+    public function getHostingType(): ?HostingType
+    {
+        return $this->hostingType;
+    }
+
+    public function setHostingType(?HostingType $hostingType): self
+    {
+        $this->hostingType = $hostingType;
+
+        return $this;
+    }
+
+    public function getLocation(): ?Location
+    {
+        return $this->location;
+    }
+
+    public function setLocation(?Location $location): self
+    {
+        $this->location = $location;
+
+        return $this;
+    }
+
+    public function getPlaceType(): ?PlaceType
+    {
+        return $this->placeType;
+    }
+
+    public function setPlaceType(?PlaceType $placeType): self
+    {
+        $this->placeType = $placeType;
+
+        return $this;
+    }
+
 
 }
