@@ -7,6 +7,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 
 use App\Entity\Activity;
 use App\Form\ActivityType;
@@ -108,7 +109,7 @@ class ActivityController extends AbstractController {
     }
 
     /**
-     * @Route("/admin/activity/delete/{id}", name="contact_delete")
+     * @Route("/admin/activity/delete/{id}", name="activity_delete")
 	 *
 	 * @IsGranted("ROLE_SUPER_ADMIN")
      */
@@ -120,10 +121,10 @@ class ActivityController extends AbstractController {
 		if(empty($object))
 			return $this->redirectToRoute('activities');
 
-		if($object->hasActions()) {
+		/*if($object->hasEditions()) {
 			$this->addFlash('notice','<p class="alert alert-danger">'.$trans->trans('not_possible_activity_has_editions').'</p>');
 			return $this->redirectToRoute('activities');
-		}
+		}*/
 
 		$entityManager = $this->getDoctrine()->getManager();
 		$entityManager->remove($object);
@@ -134,4 +135,21 @@ class ActivityController extends AbstractController {
 		$referer = $request->server->get('HTTP_REFERER');
 		return new RedirectResponse($referer);
     }
+
+    /**
+     * @Route("/admin/activity/{id}", name="activity_id")
+     */
+    public function singleActivity(Request $request, TranslatorInterface $trans, $id) {
+		$object=$this->getDoctrine()->getRepository(Action::class)->find($id);
+
+		//Check if object exists
+		if(empty($object))
+			return $this->redirectToRoute('admin');
+
+        return $this->render('default/activity.html.twig', array(
+			'title' => $trans->trans('Activity'),
+			'activity' => $object
+        ));
+    }
+
 }

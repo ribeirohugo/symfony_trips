@@ -30,12 +30,14 @@
 				<tbody>
 					{% for activity in activities%}
 					<tr>
-						<td>activity.id</td>
-						<td>activity.name</td>
+						<td>{{ activity.id }}</td>
+						<td>{{ activity.name }}</td>
 						<td></td>
 						<td></td>
-						<td></td>
-						<td></td>
+						<td>
+						<a href="{{ url('activity_edit', {id: activity.id} ) }}"><i class="fas fa-fw fa-edit"></i></a>
+						<a href="{{ url('activity_delete', {id: activity.id} ) }}"><i class="fas fa-fw fa-trash-alt"></i></a>
+						</td>
 					</tr>
 					{% endfor %}
 				</tbody>

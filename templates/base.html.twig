@@ -169,6 +169,12 @@
                             <li class="breadcrumb-item active">Dashboard</li>
                         </ol>
 
+						{% for message in app.flashes('notice') %}
+							<div class="flash-notice">
+								{{ message|raw }}
+							</div>
+						{% endfor %}
+
 					{% block body %}{% endblock %}
 
                     </div>
