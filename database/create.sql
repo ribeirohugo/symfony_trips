@@ -12,8 +12,8 @@ SET FOREIGN_KEY_CHECKS=1;*/
 CREATE TABLE users (
 	id INT NOT NULL AUTO_INCREMENT,
 	PRIMARY KEY(id),
-	username VARCHAR(250),
-	email VARCHAR(250),
+	username VARCHAR(250) NOT NULL,
+	email VARCHAR(250) NOT NULL UNIQUE,
 	phone VARCHAR(15),
 	password VARCHAR(64),
 	language VARCHAR(5),
@@ -24,14 +24,15 @@ CREATE TABLE users (
 CREATE TABLE country (
 	id INT NOT NULL AUTO_INCREMENT,
 	PRIMARY KEY(id),
-	name VARCHAR(250)
+	name VARCHAR(250) NOT NULL UNIQUE,
+	slug VARCHAR(250) NOT NULL
 );
 
 /*Region table*/
 CREATE TABLE region (
 	id INT NOT NULL AUTO_INCREMENT,
 	PRIMARY KEY(id),
-	name VARCHAR(250),
+	name VARCHAR(250) UNIQUE,
 	country INT,
 
 	CONSTRAINT fk_region_country FOREIGN KEY (country) REFERENCES country(id)
@@ -41,7 +42,7 @@ CREATE TABLE region (
 CREATE TABLE location (
 	id INT NOT NULL AUTO_INCREMENT,
 	PRIMARY KEY(id),
-	name VARCHAR(250),
+	name VARCHAR(250) UNIQUE,
 	region INT,
 
 	CONSTRAINT fk_location_region FOREIGN KEY (region) REFERENCES region(id)
@@ -61,21 +62,21 @@ CREATE TABLE activity (
 CREATE TABLE place_type (
 	id INT NOT NULL AUTO_INCREMENT,
 	PRIMARY KEY(id),
-	name VARCHAR(250)
+	name VARCHAR(250) NOT NULL UNIQUE
 );
 
 /* Hosting Type. */
 CREATE TABLE hosting_type (
 	id INT NOT NULL AUTO_INCREMENT,
 	PRIMARY KEY(id),
-	name VARCHAR(250)
+	name VARCHAR(250) NOT NULL UNIQUE
 );
 
 /* Attraction Type. */
 CREATE TABLE attraction_type (
 	id INT NOT NULL AUTO_INCREMENT,
 	PRIMARY KEY(id),
-	name VARCHAR(250)
+	name VARCHAR(250) NOT NULL UNIQUE
 );
 
 /* Place table */
