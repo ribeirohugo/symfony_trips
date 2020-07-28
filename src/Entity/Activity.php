@@ -8,6 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Activity
  *
  * @ORM\Table(name="activity")
+ * @ORM\Entity(repositoryClass="App\Repository\ActivityRepository") *
  * @ORM\Entity
  */
 class Activity
