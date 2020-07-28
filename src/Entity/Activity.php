@@ -41,7 +41,7 @@ class Activity
      *
      * @ORM\Column(name="timestamp", type="datetime", nullable=true, options={"default"="CURRENT_TIMESTAMP"})
      */
-    private $timestamp = 'CURRENT_TIMESTAMP';
+    private $timestamp;
 
     /**
      * @var string|null
@@ -49,6 +49,10 @@ class Activity
      * @ORM\Column(name="drive_files", type="string", length=250, nullable=true)
      */
     private $driveFiles;
+
+	public function __construct() {
+		$this->timestamp = new \DateTime();
+    }
 
     public function getId(): ?int
     {
