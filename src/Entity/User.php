@@ -10,6 +10,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
  * User
  *
  * @ORM\Table(name="users")
+ * @ORM\Entity(repositoryClass="App\Repository\UserRepository") *
  * @ORM\Entity
  */
 class User implements UserInterface, \Serializable
