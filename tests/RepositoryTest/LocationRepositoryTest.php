@@ -1,10 +1,10 @@
 <?php // tests/Repository/RegionRepositoryTest.php
 namespace App\Tests\Repository;
 
-use App\Entity\Region;
+use App\Entity\Location;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
-class RegionRepositoryTest extends KernelTestCase
+class LocationRepositoryTest extends KernelTestCase
 {
     /**
      * @var \Doctrine\ORM\EntityManager
@@ -22,20 +22,32 @@ class RegionRepositoryTest extends KernelTestCase
 
     public function testSearchById()
     {
-        $region = $this->entityManager
-            ->getRepository(Region::class)
+        $object = $this->entityManager
+            ->getRepository(Location::class)
             ->find(1)
         ;
 
-        $this->assertSame(1, $region->getId());
+        $this->assertSame(1, $object->getId());
     }
 
     public function testSearchByName()
     {
-        $region = $this->entityManager
-            ->getRepository(Region::class)
+        $object = $this->entityManager
+            ->getRepository(Location::class)
             ->findOneBy(['name' => 'Porto'])
         ;
+
+        $this->assertSame("Porto", $object->getName());
+    }
+
+    public function testSearchByRegion()
+    {
+        $object = $this->entityManager
+            ->getRepository(Location::class)
+            ->findOneBy(['name' => 'Porto'])
+        ;
+
+		$region = $object->getRegion();
 
         $this->assertSame("Porto", $region->getName());
     }
