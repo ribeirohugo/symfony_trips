@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Place
  *
- * @ORM\Table(name="place", indexes={@ORM\Index(name="fk_place_attraction_type", columns={"attraction_type"}), @ORM\Index(name="fk_place_hosting_type", columns={"hosting_type"}), @ORM\Index(name="fk_place_location", columns={"location"}), @ORM\Index(name="fk_place_type", columns={"place_type"})})
+ * @ORM\Table(name="place", indexes={@ORM\Index(name="fk_place_hosting_type", columns={"hosting_type"}), @ORM\Index(name="fk_place_location", columns={"location"}), @ORM\Index(name="fk_place_type", columns={"place_type"})})
  * @ORM\Entity
  */
 class Place
@@ -90,16 +90,6 @@ class Place
      * @ORM\Column(name="stars", type="string", length=1, nullable=true)
      */
     private $stars;
-
-    /**
-     * @var \AttractionType
-     *
-     * @ORM\ManyToOne(targetEntity="AttractionType")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="attraction_type", referencedColumnName="id")
-     * })
-     */
-    private $attractionType;
 
     /**
      * @var \HostingType
@@ -252,18 +242,6 @@ class Place
     public function setStars(?string $stars): self
     {
         $this->stars = $stars;
-
-        return $this;
-    }
-
-    public function getAttractionType(): ?AttractionType
-    {
-        return $this->attractionType;
-    }
-
-    public function setAttractionType(?AttractionType $attractionType): self
-    {
-        $this->attractionType = $attractionType;
 
         return $this;
     }
