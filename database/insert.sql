@@ -81,3 +81,18 @@ INSERT INTO place(name, location, place_type, last_price) VALUES ("Torre dos Cl�
 INSERT INTO place(name, location, place_type, last_price) VALUES ("Sé Catedral", @location, @placetype, 0.00);
 INSERT INTO place(name, location, place_type, last_price) VALUES ("Palácio da Bolsa", @location, @placetype, 7.00);
 
+/* Insert status */
+/*INSERT INTO status (name) VALUES ("Pending");
+INSERT INTO status (name) VALUES ("Cancelled");
+INSERT INTO status (name) VALUES ("Finished");*/
+
+/* Insert activity type */
+INSERT INTO activity_type (name) VALUES ("Travel");
+INSERT INTO activity_type (name) VALUES ("Party");
+INSERT INTO activity_type (name) VALUES ("Event");
+
+/* Insert hosting type */
+INSERT INTO hosting_type (name) VALUES ("Hotel");
+INSERT INTO hosting_type (name) VALUES ("Hostel");
+INSERT INTO hosting_type (name) VALUES ("House");
+

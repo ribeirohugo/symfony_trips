@@ -48,6 +48,13 @@ CREATE TABLE location (
 	CONSTRAINT fk_location_region FOREIGN KEY (region) REFERENCES region(id)
 );
 
+/* Activity Type. */
+CREATE TABLE activity_type (
+	id INT NOT NULL AUTO_INCREMENT,
+	PRIMARY KEY(id),
+	name VARCHAR(250) NOT NULL UNIQUE
+);
+
 /*Tabela activity or trip */
 CREATE TABLE activity (
 	id INT NOT NULL AUTO_INCREMENT,
@@ -55,7 +62,10 @@ CREATE TABLE activity (
 	name VARCHAR(250),
 	description TEXT,
 	timestamp datetime default CURRENT_TIMESTAMP,
-	drive_files VARCHAR(250)
+	drive_files VARCHAR(250),
+	activity_type INT,
+
+	CONSTRAINT fk_activity_type FOREIGN KEY (activity_type) REFERENCES activity_type(id)
 );
 
 /* Place Type. It could be Hosting, Restaurant, Attraction, Club */
@@ -73,17 +83,17 @@ CREATE TABLE hosting_type (
 );
 
 /* Attraction Type. */
-CREATE TABLE attraction_type (
+/*CREATE TABLE attraction_type (
 	id INT NOT NULL AUTO_INCREMENT,
 	PRIMARY KEY(id),
 	name VARCHAR(250) NOT NULL UNIQUE
-);
+);*/
 
 /* Place table */
 CREATE TABLE place (
 	id INT NOT NULL AUTO_INCREMENT,
 	PRIMARY KEY(id),
-	name VARCHAR(250),
+	name VARCHAR(250) NOT NULL,
 	description TEXT,
 	timestamp datetime default CURRENT_TIMESTAMP,
 	location INT,
@@ -98,12 +108,10 @@ CREATE TABLE place (
 
 	stars VARCHAR(1),
 	hosting_type INT,
-	attraction_type INT,
 
 	CONSTRAINT fk_place_location FOREIGN KEY (location) REFERENCES location(id),
 	CONSTRAINT fk_place_type FOREIGN KEY (place_type) REFERENCES place_type(id),
-	CONSTRAINT fk_place_hosting_type FOREIGN KEY (hosting_type) REFERENCES hosting_type(id),
-	CONSTRAINT fk_place_attraction_type FOREIGN KEY (attraction_type) REFERENCES attraction_type(id)
+	CONSTRAINT fk_place_hosting_type FOREIGN KEY (hosting_type) REFERENCES hosting_type(id)
 );
 
 /*Contacts table*/
