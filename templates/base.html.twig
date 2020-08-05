@@ -93,12 +93,24 @@
                             <div class="collapse" id="collapsePlaces" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav">
 									<a class="nav-link" href="{{ url('places') }}">Overall</a>
+									<a class="nav-link" href="{{ url('places_new') }}">Register New</a>
 									<a class="nav-link" href="{{ url('beaches') }}">Beach</a>
 									<a class="nav-link" href="{{ url('clubs') }}">Clubs</a>
-                                    <a class="nav-link" href="{{ url('hostings') }}">Hosting</a>
 									<a class="nav-link" href="{{ url('monuments') }}">Monuments</a>
 									<a class="nav-link" href="{{ url('museums') }}">Museums</a>
                                     <a class="nav-link" href="{{ url('restaurants') }}">Restaurants</a>
+                                </nav>
+                            </div>
+
+                            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseHostings" aria-expanded="false" aria-controls="collapseHostings">
+                                <div class="sb-nav-link-icon"><i class="fas fa-hotel"></i></div>
+                                Hosting
+                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                            </a>
+                            <div class="collapse" id="collapseHostings" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
+                                <nav class="sb-sidenav-menu-nested nav">
+									<a class="nav-link" href="{{ url('places') }}">Overall</a>
+									<a class="nav-link" href="{{ url('places_new') }}">Register New</a>
                                 </nav>
                             </div>
 
@@ -185,7 +197,7 @@
                 <footer class="py-4 bg-light mt-auto">
                     <div class="container-fluid">
                         <div class="d-flex align-items-center justify-content-between small">
-                            <div class="text-muted">Copyright &copy; Your Website 2020</div>
+                            <div class="text-muted">Copyright &copy; {{ project_company}} 2020</div>
                             <div>
                                 <a href="#">Privacy Policy</a>
                                 &middot;
