@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 
 /**
  * Contact
@@ -61,7 +63,7 @@ class Contact
      *
      * @ORM\Column(name="timestamp", type="datetime", nullable=true, options={"default"="CURRENT_TIMESTAMP"})
      */
-    private $timestamp = 'CURRENT_TIMESTAMP';
+    private $timestamp;
 
     /**
      * @var string|null
@@ -79,6 +81,10 @@ class Contact
      * })
      */
     private $activity;
+
+	public function __construct() {
+		$this->timestamp = new \DateTime();
+    }
 
     public function getId(): ?int
     {
