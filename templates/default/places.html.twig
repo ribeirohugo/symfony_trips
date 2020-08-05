@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+
+<div class="card mb-4">
+	<div class="card-header">
+		<i class="fas fa-table mr-1"></i>
+		{{ title }}
+	</div>
+	<div class="card-body">
+		<div class="table-responsive">
+			<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+				<thead>
+					<tr>
+						<th>Id</th>
+						<th>Name</th>
+						<th>Location</th>
+						<th>Type</th>
+						<th>Options</th>
+					</tr>
+				</thead>
+				<tfoot>
+					<tr>
+						<th>Id</th>
+						<th>Name</th>
+						<th>Location</th>
+						<th>Type</th>
+						<th>Options</th>
+					</tr>
+				</tfoot>
+				<tbody>
+					{% for place in places%}
+					<tr>
+						<td>{{ place.id }}</td>
+						<td>{{ place.name }}</td>
+						<td>{{ place.location.name }}</td>
+						<td>{{ place.placetype.name }}</td>
+						<td>
+						<a href=""><i class="fas fa-fw fa-edit"></i></a>
+						<a href=""><i class="fas fa-fw fa-trash-alt"></i></a>
+						</td>
+					</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>
+
+{% endblock %}
