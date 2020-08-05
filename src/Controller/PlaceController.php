@@ -10,13 +10,16 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 //Places classes
 use App\Entity\Place;
-//use App\Form\PlaceType;
+use App\Form\PlaceTypeType;
 use App\Repository\PlaceRepository;
 
 //Places classes
 use App\Entity\PlaceType;
 use App\Repository\PlaceTypeRepository;
 
+//Translation
+use Symfony\Component\Translation\Translator;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 class PlaceController extends AbstractController {
     /**
@@ -134,6 +137,81 @@ class PlaceController extends AbstractController {
         return $this->render('default/places.html.twig', [
             'places' => $objects,
 			'title' => 'Restaurants'
+		]);
+    }
+
+    /**
+     * @Route("/admin/places/new", name="places_new")
+     */
+    public function placesNew(Request $request, TranslatorInterface $t)
+    {
+        $object = new Place;
+		$form = $this->createForm(PlaceTypeType::class, $object);
+
+		$form->handleRequest($request);
+
+		//1 - When form is submitted
+		if($form->isSubmitted()) {
+			if($form->isValid()) {
+
+				//2 - Fetching form data
+				$object = $form->getData();
+
+				$entityManager = $this->getDoctrine()->getManager();
+				$entityManager->persist($object);
+				$entityManager->flush();
+
+				$this->addFlash('notice','<p class="alert alert-success">'.$t->trans('Place successfully registered.').'</p>');
+				
+				return $this->redirectToRoute('places');
+			} else {
+				$this->addFlash('notice','<p class="alert alert-danger">'.$t->trans('Error while registering place.').'</p>');
+			}
+		}
+
+        return $this->render('default/form.html.twig', [
+			'title' => 'New Place',
+			'form' => $form->createView()
+		]);
+    }
+
+    /**
+     * @Route("/admin/places/edit/{id}", name="places_edit")
+     */
+    public function placesEdit(Request $request, TranslatorInterface $t, $id)
+    {
+		$object=$this->getDoctrine()->getRepository(Place::class)->find($id);
+
+		//Check if object exists
+		if(empty($object))
+			return $this->redirectToRoute('places');
+
+		$form = $this->createForm(PlaceTypeType::class, $object);
+
+		$form->handleRequest($request);
+
+		//1 - When form is submitted
+		if($form->isSubmitted()) {
+			if($form->isValid()) {
+
+				//2 - Fetching form data
+				$object = $form->getData();
+
+				$entityManager = $this->getDoctrine()->getManager();
+				$entityManager->persist($object);
+				$entityManager->flush();
+
+				$this->addFlash('notice','<p class="alert alert-success">'.$t->trans('Place successfully registered.').'</p>');
+				
+				return $this->redirectToRoute('places');
+			} else {
+				$this->addFlash('notice','<p class="alert alert-danger">'.$t->trans('Error while registering place.').'</p>');
+			}
+		}
+
+        return $this->render('default/form.html.twig', [
+			'title' => 'Edit Place',
+			'form' => $form->createView()
 		]);
     }
 }
