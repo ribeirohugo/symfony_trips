@@ -104,7 +104,6 @@ CREATE TABLE place (
 	positive_points TEXT,
 	negative_points TEXT,
 	address VARCHAR(250),
-	drive_files VARCHAR(250),
 
 	stars VARCHAR(1),
 	hosting_type INT,
