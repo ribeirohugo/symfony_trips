@@ -4,6 +4,9 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
+
 /**
  * PlaceType
  *
@@ -28,6 +31,15 @@ class PlaceType
      */
     private $name;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Place", mappedBy="placeType")
+     */
+    private $places;
+
+    public function __construct() {
+		$this->places = new ArrayCollection();
+	}
+
     public function getId(): ?int
     {
         return $this->id;
@@ -45,5 +57,15 @@ class PlaceType
         return $this;
     }
 
+    /**
+     * @return Collection|Places[]
+     */
+    public function getPlaces(): Collection
+    {
+        return $this->places;
+    }
 
+	public function hasPlaces() {
+		return (bool) $this->getPlaces()->count();
+	}
 }
