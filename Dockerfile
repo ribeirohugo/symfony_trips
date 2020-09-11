@@ -26,6 +26,12 @@ RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 RUN docker-php-ext-install pdo_mysql mbstring zip exif pcntl
 RUN docker-php-ext-install gd
 
+# Install intl extension
+RUN apt-get -y update \
+&& apt-get install -y libicu-dev\
+&& docker-php-ext-configure intl \
+&& docker-php-ext-install intl
+
 # Install composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
@@ -44,6 +50,11 @@ USER root
 
 # Install dependencies
 RUN composer update
+
+# Generate symfony database
+# RUN php bin/console make:migration
+# RUN php bin/console doctrine:migrations:migrate
+# RUN php bin/console doctrine:fixtures:load --append
 
 # Expose port 9000 and start php-fpm server
 EXPOSE 9000
