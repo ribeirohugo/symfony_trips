@@ -64,7 +64,11 @@ class User implements UserInterface, \Serializable
      *
      * @ORM\Column(name="timestamp", type="datetime", nullable=true, options={"default"="CURRENT_TIMESTAMP"})
      */
-    private $timestamp = 'CURRENT_TIMESTAMP';
+    private $timestamp;
+
+    public function __construct() {
+        $this->timestamp = new \DateTime();
+    }
 
     public function getId(): ?int
     {

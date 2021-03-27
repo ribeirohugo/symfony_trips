@@ -22,19 +22,47 @@ final class Version20200910165818 extends AbstractMigration
         $this->addSql('CREATE TABLE place_type (id INT AUTO_INCREMENT NOT NULL, name VARCHAR(250) DEFAULT NULL, PRIMARY KEY(id))');
         $this->addSql('CREATE TABLE hosting_type (id INT AUTO_INCREMENT NOT NULL, name VARCHAR(250) DEFAULT NULL, PRIMARY KEY(id))');
         $this->addSql('CREATE TABLE country (id INT AUTO_INCREMENT NOT NULL, name VARCHAR(250) DEFAULT NULL, slug VARCHAR(2) DEFAULT NULL, PRIMARY KEY(id))');
-        $this->addSql('CREATE TABLE region (id INT AUTO_INCREMENT NOT NULL, country INT DEFAULT NULL, name VARCHAR(250) DEFAULT NULL, INDEX fk_region_country (country), PRIMARY KEY(id))');
-        $this->addSql('CREATE TABLE location (id INT AUTO_INCREMENT NOT NULL, region INT DEFAULT NULL, name VARCHAR(250) DEFAULT NULL, INDEX fk_location_region (region), PRIMARY KEY(id))');
-        $this->addSql('CREATE TABLE place (id INT AUTO_INCREMENT NOT NULL, hosting_type INT DEFAULT NULL, location INT DEFAULT NULL, place_type INT DEFAULT NULL, name VARCHAR(250) DEFAULT NULL, description TEXT DEFAULT NULL, timestamp DATETIME DEFAULT CURRENT_TIMESTAMP, last_price DOUBLE PRECISION DEFAULT NULL, main_contact VARCHAR(250) DEFAULT NULL, positive_points TEXT DEFAULT NULL, negative_points TEXT DEFAULT NULL, address VARCHAR(250) DEFAULT NULL, drive_files VARCHAR(250) DEFAULT NULL, stars VARCHAR(1) DEFAULT NULL, INDEX fk_place_hosting_type (hosting_type), INDEX fk_place_location (location), INDEX fk_place_type (place_type), PRIMARY KEY(id))');
+        $this->addSql('CREATE TABLE region (id INT AUTO_INCREMENT NOT NULL, country INT DEFAULT NULL, name VARCHAR(250) DEFAULT NULL, PRIMARY KEY(id))');
+        $this->addSql('CREATE TABLE location (id INT AUTO_INCREMENT NOT NULL, region INT DEFAULT NULL, name VARCHAR(250) DEFAULT NULL, PRIMARY KEY(id))');
+
+        $this->addSql("CREATE TABLE place(
+            id INT AUTO_INCREMENT NOT NULL,
+            hosting_type INT DEFAULT NULL,
+            location INT DEFAULT NULL,
+            place_type INT DEFAULT NULL,
+            name VARCHAR(250) DEFAULT NULL,
+            description TEXT DEFAULT NULL,
+            timestamp DATETIME DEFAULT CURRENT_TIMESTAMP,
+            last_price DOUBLE PRECISION DEFAULT NULL,
+            main_contact VARCHAR(250) DEFAULT NULL,
+            positive_points TEXT DEFAULT NULL,
+            negative_points TEXT DEFAULT NULL,
+            address VARCHAR(250) DEFAULT NULL,
+            drive_files VARCHAR(250) DEFAULT NULL,
+            stars VARCHAR(1) DEFAULT NULL,
+            PRIMARY KEY(id))");
         $this->addSql('CREATE TABLE activity_type (id INT AUTO_INCREMENT NOT NULL, name VARCHAR(250) DEFAULT NULL, PRIMARY KEY(id))');
         $this->addSql('CREATE TABLE activity (id INT AUTO_INCREMENT NOT NULL, name VARCHAR(250) DEFAULT NULL, description TEXT DEFAULT NULL, timestamp DATETIME DEFAULT CURRENT_TIMESTAMP, drive_files VARCHAR(250) DEFAULT NULL, PRIMARY KEY(id))');
-        $this->addSql('CREATE TABLE team_building (id INT AUTO_INCREMENT NOT NULL, activity INT DEFAULT NULL, url VARCHAR(250) DEFAULT NULL, INDEX fk_team_building_activity (activity), PRIMARY KEY(id))');
-        $this->addSql('CREATE TABLE product_activity (id INT AUTO_INCREMENT NOT NULL, activity INT DEFAULT NULL, product INT DEFAULT NULL, INDEX fk_product_activity_activity (activity), INDEX fk_product_activity_product (product), PRIMARY KEY(id))');
-        $this->addSql('CREATE TABLE edition (id INT AUTO_INCREMENT NOT NULL, activity INT DEFAULT NULL, semester VARCHAR(250) DEFAULT NULL, INDEX fk_edition_activity (activity), PRIMARY KEY(id))');
-        $this->addSql('CREATE TABLE report (id INT AUTO_INCREMENT NOT NULL, edition INT DEFAULT NULL, url VARCHAR(250) DEFAULT NULL, INDEX fk_report_edition (edition), PRIMARY KEY(id))');
-        $this->addSql('CREATE TABLE budget (id INT AUTO_INCREMENT NOT NULL, edition INT DEFAULT NULL, url VARCHAR(250) DEFAULT NULL, INDEX fk_edition_budget (edition), PRIMARY KEY(id))');
-        $this->addSql('CREATE TABLE contact (id INT AUTO_INCREMENT NOT NULL, activity INT DEFAULT NULL, name VARCHAR(250) DEFAULT NULL, email VARCHAR(250) DEFAULT NULL, phone VARCHAR(15) DEFAULT NULL, phone2 VARCHAR(15) DEFAULT NULL, description TEXT DEFAULT NULL, timestamp DATETIME DEFAULT CURRENT_TIMESTAMP, skype VARCHAR(150) DEFAULT NULL, INDEX fk_contact_activity (activity), PRIMARY KEY(id))');
-        $this->addSql('CREATE TABLE contact_place (id INT AUTO_INCREMENT NOT NULL, contact INT DEFAULT NULL, place INT DEFAULT NULL, INDEX fk_contact_place_contact (contact), INDEX fk_contact_place_place (place), PRIMARY KEY(id))');
-        $this->addSql('CREATE TABLE city_tour (id INT AUTO_INCREMENT NOT NULL, activity INT DEFAULT NULL, title VARCHAR(250) DEFAULT NULL, INDEX fk_city_tour_activity (activity), PRIMARY KEY(id))');
+        $this->addSql('CREATE TABLE team_building (id INT AUTO_INCREMENT NOT NULL, activity INT DEFAULT NULL, url VARCHAR(250) DEFAULT NULL, PRIMARY KEY(id))');
+        $this->addSql('CREATE TABLE product_activity (id INT AUTO_INCREMENT NOT NULL, activity INT DEFAULT NULL, product INT DEFAULT NULL, PRIMARY KEY(id))');
+        $this->addSql('CREATE TABLE edition (id INT AUTO_INCREMENT NOT NULL, activity INT DEFAULT NULL, semester VARCHAR(250) DEFAULT NULL, PRIMARY KEY(id))');
+        $this->addSql('CREATE TABLE report (id INT AUTO_INCREMENT NOT NULL, edition INT DEFAULT NULL, url VARCHAR(250) DEFAULT NULL, PRIMARY KEY(id))');
+        $this->addSql('CREATE TABLE budget (id INT AUTO_INCREMENT NOT NULL, edition INT DEFAULT NULL, url VARCHAR(250) DEFAULT NULL, PRIMARY KEY(id))');
+
+        $this->addSql("CREATE TABLE contact (
+        id INT AUTO_INCREMENT NOT NULL,
+        activity INT DEFAULT NULL,
+        name VARCHAR(250) DEFAULT NULL,
+        email VARCHAR(250) DEFAULT NULL,
+        phone VARCHAR(15) DEFAULT NULL,
+        phone2 VARCHAR(15) DEFAULT NULL,
+        description TEXT DEFAULT NULL,
+        timestamp DATETIME DEFAULT CURRENT_TIMESTAMP,
+        skype VARCHAR(150) DEFAULT NULL,
+        PRIMARY KEY(id))");
+
+        $this->addSql('CREATE TABLE contact_place (id INT AUTO_INCREMENT NOT NULL, contact INT DEFAULT NULL, place INT DEFAULT NULL, PRIMARY KEY(id))');
+        $this->addSql('CREATE TABLE city_tour (id INT AUTO_INCREMENT NOT NULL, activity INT DEFAULT NULL, title VARCHAR(250) DEFAULT NULL, PRIMARY KEY(id))');
 
         $this->addSql('ALTER TABLE region ADD CONSTRAINT FK_REGION_COUNTRY FOREIGN KEY (country) REFERENCES country (id)');
         $this->addSql('ALTER TABLE location ADD CONSTRAINT FK_LOCATION_REGION FOREIGN KEY (region) REFERENCES region (id)');
