@@ -35,12 +35,18 @@ class Country
      */
     private $slug;
 
-    public function getId(): ?int
+    public function __construct(string $name, string $slug)
+    {
+        $this->name = $name;
+        $this->slug = $slug;
+    }
+
+    public function getId(): int
     {
         return $this->id;
     }
 
-    public function getName(): ?string
+    public function getName(): string
     {
         return $this->name;
     }
@@ -52,7 +58,7 @@ class Country
         return $this;
     }
 
-    public function getSlug(): ?string
+    public function getSlug(): string
     {
         return $this->slug;
     }

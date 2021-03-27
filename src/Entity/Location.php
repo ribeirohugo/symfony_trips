@@ -38,6 +38,12 @@ class Location
      */
     private $region;
 
+    public function __construct(string $name, Region $region)
+    {
+        $this->name  = $name;
+        $this->region = $region;
+    }
+
     public function getId(): ?int
     {
         return $this->id;
