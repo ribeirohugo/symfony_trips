@@ -10,7 +10,7 @@ use Doctrine\Common\Persistence\ManagerRegistry;
  * @method TeamBuilding[]    findAll()
  * @method TeamBuilding[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class TeamBuildingRepository extends EntityRepository
+class TeamBuildingRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {

@@ -10,7 +10,7 @@ use Doctrine\Common\Persistence\ManagerRegistry;
  * @method Edition[]    findAll()
  * @method Edition[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class EditionRepository extends EntityRepository
+class EditionRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
