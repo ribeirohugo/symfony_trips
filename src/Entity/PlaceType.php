@@ -36,7 +36,8 @@ class PlaceType
      */
     private $places;
 
-    public function __construct() {
+    public function __construct(string $name) {
+        $this->name = $name;
 		$this->places = new ArrayCollection();
 	}
 
