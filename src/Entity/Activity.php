@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -38,14 +39,14 @@ class Activity
     private $description;
 
     /**
-     * @var \DateTime|null
+     * @var DateTime|null
      *
      * @ORM\Column(name="timestamp", type="datetime", nullable=true, options={"default"="CURRENT_TIMESTAMP"})
      */
     private $timestamp;
 
     /**
-     * @var \ActivityType
+     * @var ActivityType
      *
      * @ORM\ManyToOne(targetEntity="ActivityType")
      * @ORM\JoinColumns({
@@ -61,8 +62,9 @@ class Activity
      */
     private $driveFiles;
 
-	public function __construct() {
-		$this->timestamp = new \DateTime();
+    public function __construct()
+    {
+        $this->timestamp = new \DateTime();
     }
 
     public function getId(): ?int
@@ -108,7 +110,7 @@ class Activity
 
     public function getActivityType(): ?ActivityType
     {
-	    return $this->activityType;
+        return $this->activityType;
     }
 
     public function setActivityType(?ActivityType $activityType): self
@@ -129,6 +131,4 @@ class Activity
 
         return $this;
     }
-
-
 }
