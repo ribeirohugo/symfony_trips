@@ -8,11 +8,15 @@ use Doctrine\Persistence\ObjectManager;
 
 class LocationFixtures extends Fixture implements DependentFixtureInterface
 {
+    public const PORTO_REFERENCE = "Porto_Location";
+
     public function load(ObjectManager $manager)
     {
         $location = new Location('Porto', $this->getReference(RegionFixtures::PORTO_REFERENCE));
         $manager->persist($location);
         $manager->flush();
+
+        $this->addReference(self::PORTO_REFERENCE, $location);
 
         $location = new Location('Valongo', $this->getReference(RegionFixtures::PORTO_REFERENCE));
         $manager->persist($location);
