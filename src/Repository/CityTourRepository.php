@@ -10,7 +10,7 @@ use Doctrine\Common\Persistence\ManagerRegistry;
  * @method CityTour[]    findAll()
  * @method CityTour[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class CityTourRepository extends EntityRepository
+class CityTourRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {

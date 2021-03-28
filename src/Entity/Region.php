@@ -38,12 +38,18 @@ class Region
      */
     private $country;
 
-    public function getId(): ?int
+    public function __construct(string $name, Country $country)
+    {
+        $this->name = $name;
+        $this->country = $country;
+    }
+
+    public function getId(): int
     {
         return $this->id;
     }
 
-    public function getName(): ?string
+    public function getName(): string
     {
         return $this->name;
     }
@@ -55,7 +61,7 @@ class Region
         return $this;
     }
 
-    public function getCountry(): ?Country
+    public function getCountry(): Country
     {
         return $this->country;
     }

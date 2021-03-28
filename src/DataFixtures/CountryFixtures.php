@@ -7,18 +7,23 @@ use Doctrine\Persistence\ObjectManager;
 
 class CountryFixtures extends Fixture
 {
+    public const PORTUGAL_REFERENCE = "pt";
+
+    public const SPAIN_REFERENCE = "es";
+
     public function load(ObjectManager $manager)
     {
-        $country = new Country();
-        $country->setName('Portugal');
-        $country->setSlug('PT');
-        $manager->persist($country);
-
-        $country = new Country();
-        $country->setName('Spain');
-        $country->setSlug('ES');
-        $manager->persist($country);
-
+        $country1 = new Country('Portugal','PT');
+        $manager->persist($country1);
         $manager->flush();
+
+        $this->addReference(self::PORTUGAL_REFERENCE, $country1);
+
+        $country = new Country('Spain','ES');
+        $manager->persist($country);
+        $manager->flush();
+
+        $this->addReference(self::SPAIN_REFERENCE, $country);
+
     }
 }

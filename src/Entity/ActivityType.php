@@ -5,12 +5,12 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * AttractionType
+ * ActivityType
  *
- * @ORM\Table(name="attraction_type")
+ * @ORM\Table(name="activity_type")
  * @ORM\Entity
  */
-class AttractionType
+class ActivityType
 {
     /**
      * @var int
@@ -27,6 +27,10 @@ class AttractionType
      * @ORM\Column(name="name", type="string", length=250, nullable=true)
      */
     private $name;
+
+    public function __construct(string $name) {
+        $this->name = $name;
+    }
 
     public function getId(): ?int
     {

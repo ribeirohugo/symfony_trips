@@ -10,7 +10,6 @@ use Doctrine\Common\Collections\Collection;
  * Activity
  *
  * @ORM\Table(name="activity")
- * @ORM\Entity(repositoryClass="App\Repository\ActivityRepository") *
  * @ORM\Entity
  */
 class Activity
@@ -44,6 +43,16 @@ class Activity
      * @ORM\Column(name="timestamp", type="datetime", nullable=true, options={"default"="CURRENT_TIMESTAMP"})
      */
     private $timestamp;
+
+    /**
+     * @var \ActivityType
+     *
+     * @ORM\ManyToOne(targetEntity="ActivityType")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="activity_type", referencedColumnName="id")
+     * })
+     */
+    private $activityType;
 
     /**
      * @var string|null
@@ -93,6 +102,18 @@ class Activity
     public function setTimestamp(?\DateTimeInterface $timestamp): self
     {
         $this->timestamp = $timestamp;
+
+        return $this;
+    }
+
+    public function getActivityType(): ?ActivityType
+    {
+	    return $this->activityType;
+    }
+
+    public function setActivityType(?ActivityType $activityType): self
+    {
+        $this->activityType = $activityType;
 
         return $this;
     }
