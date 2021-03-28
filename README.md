@@ -4,7 +4,7 @@ Trips Symfony is a platform developed using PHP and Symfony used to manage a spe
 
 ## 1. Requirements
 
-This project requires ``Php 7.4`` and all Linux packages needed are available in Dockerfile.
+This project is being build using ``Symfony 5.2.5`` version and requires ``Php 7.4.X``.
 
 This project is ready to set up a MySQL database by filling those environment variables.
 
@@ -30,3 +30,7 @@ If you want to remove  use this:
 Then load default data through Doctrine Fixtures using the following command:
 
 ```php bin/console doctrine:fixtures:load```
+
+## 3. Author Rights
+
+* UI has been developed using [SB Admin](https://github.com/StartBootstrap/startbootstrap-sb-admin) template.
