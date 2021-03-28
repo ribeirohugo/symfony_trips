@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Budget
  *
- * @ORM\Table(name="budget", indexes={@ORM\Index(name="fk_edition_budget", columns={"edition"})})
+ * @ORM\Table(name="budget")
  * @ORM\Entity
  */
 class Budget
@@ -29,7 +29,7 @@ class Budget
     private $url;
 
     /**
-     * @var \Edition
+     * @var Edition
      *
      * @ORM\ManyToOne(targetEntity="Edition")
      * @ORM\JoinColumns({

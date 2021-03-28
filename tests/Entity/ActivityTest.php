@@ -6,10 +6,10 @@ use PHPUnit\Framework\TestCase;
 
 class ActivityTest extends TestCase {
 
-    public const ACTIVITY_NAME = "Name Test";
-    public const ACTIVITY_DESCRIPTION = "Description Test";
-    public const ACTIVITY_DRIVE_FILES = "Drive Files Test";
-    public const ACTIVITY_TYPE_NAME = "Activity Type Test";
+    private const ACTIVITY_NAME = "Name Test";
+    private const ACTIVITY_DESCRIPTION = "Description Test";
+    private const ACTIVITY_DRIVE_FILES = "Drive Files Test";
+    private const ACTIVITY_TYPE_NAME = "Activity Type Test";
 
     public function testActivityName() {
         $activity = new Activity();

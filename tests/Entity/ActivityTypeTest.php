@@ -5,8 +5,8 @@ use PHPUnit\Framework\TestCase;
 
 class ActivityTypeTest extends TestCase {
 
-    public const ACTIVITY_TYPE_NAME = "Monument";
-    public const ACTIVITY_TYPE_NAME2 = "Beach";
+    private const ACTIVITY_TYPE_NAME = "Monument";
+    private const ACTIVITY_TYPE_NAME2 = "Beach";
 
     public function testActivityTypeName() {
         $activityType = new ActivityType(self::ACTIVITY_TYPE_NAME);
