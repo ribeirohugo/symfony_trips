@@ -19,12 +19,12 @@ final class Version20210326220047 extends AbstractMigration
 
     public function up(Schema $schema) : void
     {
-        $this->addSql("ALTER TABLE activity ADD activity_type INT DEFAULT NULL");
+        $this->addSql('ALTER TABLE activity ADD activity_type INT DEFAULT NULL');
         $this->addSql('ALTER TABLE activity ADD CONSTRAINT FK_ACTIVITY_TYPE FOREIGN KEY (activity_type) REFERENCES activity_type (id)');
     }
 
     public function down(Schema $schema) : void
     {
-        $this->addSql("ALTER TABLE activity DROP activity_type");
+        $this->addSql('ALTER TABLE activity DROP activity_type');
     }
 }

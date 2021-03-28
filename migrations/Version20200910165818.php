@@ -19,13 +19,13 @@ final class Version20200910165818 extends AbstractMigration
         // this up() migration is auto-generated, please modify it to your needs
         $this->addSql('CREATE TABLE users (id INT AUTO_INCREMENT NOT NULL, username VARCHAR(250) DEFAULT NULL, email VARCHAR(250) DEFAULT NULL, phone VARCHAR(15) DEFAULT NULL, password VARCHAR(64) DEFAULT NULL, language VARCHAR(5) DEFAULT NULL, timestamp DATETIME DEFAULT CURRENT_TIMESTAMP, PRIMARY KEY(id))');
         $this->addSql('CREATE TABLE product (id INT AUTO_INCREMENT NOT NULL, name VARCHAR(250) DEFAULT NULL, price DOUBLE PRECISION DEFAULT NULL, PRIMARY KEY(id))');
-        $this->addSql('CREATE TABLE place_type (id INT AUTO_INCREMENT NOT NULL, name VARCHAR(250) DEFAULT NULL, PRIMARY KEY(id))');
-        $this->addSql('CREATE TABLE hosting_type (id INT AUTO_INCREMENT NOT NULL, name VARCHAR(250) DEFAULT NULL, PRIMARY KEY(id))');
-        $this->addSql('CREATE TABLE country (id INT AUTO_INCREMENT NOT NULL, name VARCHAR(250) DEFAULT NULL, slug VARCHAR(2) DEFAULT NULL, PRIMARY KEY(id))');
-        $this->addSql('CREATE TABLE region (id INT AUTO_INCREMENT NOT NULL, country INT DEFAULT NULL, name VARCHAR(250) DEFAULT NULL, PRIMARY KEY(id))');
-        $this->addSql('CREATE TABLE location (id INT AUTO_INCREMENT NOT NULL, region INT DEFAULT NULL, name VARCHAR(250) DEFAULT NULL, PRIMARY KEY(id))');
+        $this->addSql('CREATE TABLE place_type (id INT AUTO_INCREMENT NOT NULL, name VARCHAR(250) DEFAULT NULL UNIQUE, PRIMARY KEY(id))');
+        $this->addSql('CREATE TABLE hosting_type (id INT AUTO_INCREMENT NOT NULL, name VARCHAR(250) DEFAULT NULL UNIQUE, PRIMARY KEY(id))');
+        $this->addSql('CREATE TABLE country (id INT AUTO_INCREMENT NOT NULL, name VARCHAR(250) DEFAULT NULL UNIQUE, slug VARCHAR(2) DEFAULT NULL, PRIMARY KEY(id))');
+        $this->addSql('CREATE TABLE region (id INT AUTO_INCREMENT NOT NULL, country INT DEFAULT NULL, name VARCHAR(250) DEFAULT NULL UNIQUE, PRIMARY KEY(id))');
+        $this->addSql('CREATE TABLE location (id INT AUTO_INCREMENT NOT NULL, region INT DEFAULT NULL, name VARCHAR(250) DEFAULT NULL UNIQUE, PRIMARY KEY(id))');
 
-        $this->addSql("CREATE TABLE place(
+        $this->addSql('CREATE TABLE place(
             id INT AUTO_INCREMENT NOT NULL,
             hosting_type INT DEFAULT NULL,
             location INT DEFAULT NULL,
@@ -40,7 +40,8 @@ final class Version20200910165818 extends AbstractMigration
             address VARCHAR(250) DEFAULT NULL,
             drive_files VARCHAR(250) DEFAULT NULL,
             stars VARCHAR(1) DEFAULT NULL,
-            PRIMARY KEY(id))");
+            PRIMARY KEY(id))');
+
         $this->addSql('CREATE TABLE activity_type (id INT AUTO_INCREMENT NOT NULL, name VARCHAR(250) DEFAULT NULL, PRIMARY KEY(id))');
         $this->addSql('CREATE TABLE activity (id INT AUTO_INCREMENT NOT NULL, name VARCHAR(250) DEFAULT NULL, description TEXT DEFAULT NULL, timestamp DATETIME DEFAULT CURRENT_TIMESTAMP, drive_files VARCHAR(250) DEFAULT NULL, PRIMARY KEY(id))');
         $this->addSql('CREATE TABLE team_building (id INT AUTO_INCREMENT NOT NULL, activity INT DEFAULT NULL, url VARCHAR(250) DEFAULT NULL, PRIMARY KEY(id))');
@@ -49,7 +50,7 @@ final class Version20200910165818 extends AbstractMigration
         $this->addSql('CREATE TABLE report (id INT AUTO_INCREMENT NOT NULL, edition INT DEFAULT NULL, url VARCHAR(250) DEFAULT NULL, PRIMARY KEY(id))');
         $this->addSql('CREATE TABLE budget (id INT AUTO_INCREMENT NOT NULL, edition INT DEFAULT NULL, url VARCHAR(250) DEFAULT NULL, PRIMARY KEY(id))');
 
-        $this->addSql("CREATE TABLE contact (
+        $this->addSql('CREATE TABLE contact (
         id INT AUTO_INCREMENT NOT NULL,
         activity INT DEFAULT NULL,
         name VARCHAR(250) DEFAULT NULL,
@@ -59,7 +60,7 @@ final class Version20200910165818 extends AbstractMigration
         description TEXT DEFAULT NULL,
         timestamp DATETIME DEFAULT CURRENT_TIMESTAMP,
         skype VARCHAR(150) DEFAULT NULL,
-        PRIMARY KEY(id))");
+        PRIMARY KEY(id))');
 
         $this->addSql('CREATE TABLE contact_place (id INT AUTO_INCREMENT NOT NULL, contact INT DEFAULT NULL, place INT DEFAULT NULL, PRIMARY KEY(id))');
         $this->addSql('CREATE TABLE city_tour (id INT AUTO_INCREMENT NOT NULL, activity INT DEFAULT NULL, title VARCHAR(250) DEFAULT NULL, PRIMARY KEY(id))');
