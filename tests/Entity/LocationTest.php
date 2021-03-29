@@ -7,7 +7,6 @@ use PHPUnit\Framework\TestCase;
 
 class LocationTest extends TestCase {
 
-
     private const COUNTRY_NAME = "Portugal";
     private const COUNTRY_SLUG = "pt";
     private const REGION_NAME = "Porto";
