@@ -29,7 +29,7 @@ class CityTour
     private $title;
 
     /**
-     * @var \Activity
+     * @var Activity
      *
      * @ORM\ManyToOne(targetEntity="Activity")
      * @ORM\JoinColumns({

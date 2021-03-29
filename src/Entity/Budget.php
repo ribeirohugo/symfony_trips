@@ -66,6 +66,4 @@ class Budget
 
         return $this;
     }
-
-
 }
