@@ -8,8 +8,12 @@ class EditionTest extends TestCase {
 
     private const EDITION_SEMESTER = "2020 - 1st semester";
 
-    public function testEditionSemester() {
+    public function testEdition() {
         $edition = new Edition();
+
+        $edition->setId(1);
+        $this->assertEquals(1, $edition->getId());
+
         $edition->setSemester(self::EDITION_SEMESTER);
         $this->assertEquals(self::EDITION_SEMESTER, $edition->getSemester());
 

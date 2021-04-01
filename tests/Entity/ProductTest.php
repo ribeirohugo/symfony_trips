@@ -8,6 +8,12 @@ class ProductTest extends TestCase {
     private const PRODUCT_NAME = "2020 - 1st semester";
     private const PRODUCT_PRICE = 20.3;
 
+    public function testProductId() {
+        $product = new Product();
+        $product->setId(1);
+        $this->assertEquals(1, $product->getId());
+    }
+
     public function testProductName() {
         $product = new Product();
         $product->setName(self::PRODUCT_NAME);

@@ -11,6 +11,9 @@ class CityTourTest extends TestCase {
     public function testCityTourTitle() {
         $cityTour = new CityTour();
 
+        $cityTour->setId(1);
+        $this->assertEquals(1, $cityTour->getId());
+
         $cityTour->setTitle(self::CITY_TOUR_TITLE);
         $this->assertEquals(self::CITY_TOUR_TITLE,$cityTour->getTitle());
     }
@@ -23,5 +26,6 @@ class CityTourTest extends TestCase {
         $cityTour->setActivity($activity);
         $this->assertEquals($activity, $cityTour->getActivity());
     }
+
 
 }

@@ -46,6 +46,13 @@ class PlaceType
         return $this->id;
     }
 
+    public function setId(int $id): self
+    {
+        $this->id = $id;
+
+        return $this;
+    }
+
     public function getName(): ?string
     {
         return $this->name;
@@ -69,4 +76,11 @@ class PlaceType
 	public function hasPlaces() {
 		return (bool) $this->getPlaces()->count();
 	}
+
+	public function addPlace(Place $place): self
+    {
+        $this->places->add($place);
+
+        return $this;
+    }
 }

@@ -43,6 +43,13 @@ class Edition
         return $this->id;
     }
 
+    public function setId(int $id) :self
+    {
+        $this->id = $id;
+
+        return $this;
+    }
+
     public function getSemester(): ?string
     {
         return $this->semester;

@@ -8,12 +8,15 @@ class ActivityTypeTest extends TestCase {
     private const ACTIVITY_TYPE_NAME = "Monument";
     private const ACTIVITY_TYPE_NAME2 = "Beach";
 
-    public function testActivityTypeName() {
+    public function testActivityType() {
         $activityType = new ActivityType(self::ACTIVITY_TYPE_NAME);
         $this->assertEquals(self::ACTIVITY_TYPE_NAME, $activityType->getName());
 
         $activityType->setName(self::ACTIVITY_TYPE_NAME2);
         $this->assertEquals(self::ACTIVITY_TYPE_NAME2,$activityType->getName());
+
+        $activityType->setId(1);
+        $this->assertEquals(1, $activityType->getId());
     }
 
     public function testActivityConstructor() {
