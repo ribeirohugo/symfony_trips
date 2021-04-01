@@ -51,7 +51,7 @@ class Region
 
     public function setId(int $id): self
     {
-        $this->setId($id);
+        $this->id = $id;
 
         return $this;
     }

@@ -64,6 +64,10 @@ class ActivityTest extends TestCase {
         $activity->setActivityType($activityType);
         $activity2->setActivityType($activityType);
 
+        $activity->setId(1);
+        $activity2->setId(1);
+        $this->assertEquals(1, $activity->getId());
+
         $this->assertEquals($activity, $activity2);
     }
 }
