@@ -6,6 +6,8 @@ use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
 class UserRepositoryTest extends KernelTestCase
 {
+    private const USER_EMAIL = "test@domain.com";
+
     /**
      * @var EntityManager
      */
@@ -20,24 +22,14 @@ class UserRepositoryTest extends KernelTestCase
             ->getManager();
     }
 
-    public function testSearchById()
-    {
-        $object = $this->entityManager
-            ->getRepository(User::class)
-            ->find(1)
-        ;
-
-        $this->assertSame(1, $object->getId());
-    }
-
     public function testSearchByEmail()
     {
         $object = $this->entityManager
             ->getRepository(User::class)
-            ->findOneBy(['email' => 'ribeirohugo.op@gmail.com'])
+            ->findOneBy(['email' => self::USER_EMAIL])
         ;
 
-        $this->assertSame("ribeirohugo.op@gmail.com", $object->getEmail());
+        $this->assertSame(self::USER_EMAIL, $object->getEmail());
     }
 
     protected function tearDown(): void

@@ -6,6 +6,8 @@ use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
 class PlaceRepositoryTest extends KernelTestCase
 {
+    private const PLACE_NAME = "Torre dos Clérigos";
+
     /**
      * @var EntityManager
      */
@@ -20,24 +22,14 @@ class PlaceRepositoryTest extends KernelTestCase
             ->getManager();
     }
 
-    public function testSearchById()
-    {
-        $object = $this->entityManager
-            ->getRepository(Place::class)
-            ->find(1)
-        ;
-
-        $this->assertSame(1, $object->getId());
-    }
-
     public function testSearchByName()
     {
         $object = $this->entityManager
             ->getRepository(Place::class)
-            ->findOneBy(['name' => 'Torre dos Clérigos'])
+            ->findOneBy(['name' => self::PLACE_NAME])
         ;
 
-        $this->assertSame("Torre dos Clérigos", $object->getName());
+        $this->assertSame(self::PLACE_NAME, $object->getName());
     }
 
     protected function tearDown(): void

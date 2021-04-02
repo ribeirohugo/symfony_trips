@@ -6,6 +6,8 @@ use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
 class CountryRepositoryTest extends KernelTestCase
 {
+    private const COUNTRY_NAME = "Portugal";
+
     /**
      * @var EntityManager
      */
@@ -20,24 +22,14 @@ class CountryRepositoryTest extends KernelTestCase
             ->getManager();
     }
 
-    public function testSearchById()
-    {
-        $object = $this->entityManager
-            ->getRepository(Country::class)
-            ->find(1)
-        ;
-
-        $this->assertSame(1, $object->getId());
-    }
-
     public function testSearchByName()
     {
         $object = $this->entityManager
             ->getRepository(Country::class)
-            ->findOneBy(['name' => 'Portugal'])
+            ->findOneBy(['name' => self::COUNTRY_NAME])
         ;
 
-        $this->assertSame("Portugal", $object->getName());
+        $this->assertSame(self::COUNTRY_NAME, $object->getName());
     }
 
     protected function tearDown(): void

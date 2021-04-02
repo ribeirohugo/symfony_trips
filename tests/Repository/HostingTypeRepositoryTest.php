@@ -6,6 +6,8 @@ use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
 class HostingTypeRepositoryTest extends KernelTestCase
 {
+    private const HOSTING_TYPE_NAME = "Hostel";
+
     /**
      * @var EntityManager
      */
@@ -20,24 +22,14 @@ class HostingTypeRepositoryTest extends KernelTestCase
             ->getManager();
     }
 
-    public function testSearchById()
-    {
-        $object = $this->entityManager
-            ->getRepository(HostingType::class)
-            ->find(1)
-        ;
-
-        $this->assertSame(1, $object->getId());
-    }
-
     public function testSearchByName()
     {
         $object = $this->entityManager
             ->getRepository(HostingType::class)
-            ->findOneBy(['name' => 'Hostel'])
+            ->findOneBy(['name' => self::HOSTING_TYPE_NAME])
         ;
 
-        $this->assertSame("Hostel", $object->getName());
+        $this->assertSame(self::HOSTING_TYPE_NAME, $object->getName());
     }
 
     protected function tearDown(): void

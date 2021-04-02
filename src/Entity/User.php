@@ -66,7 +66,8 @@ class User implements UserInterface, \Serializable
      */
     private $timestamp;
 
-    public function __construct() {
+    public function __construct()
+    {
         $this->timestamp = new \DateTime();
     }
 
@@ -153,14 +154,14 @@ class User implements UserInterface, \Serializable
 
         return $this;
     }
-	
+
     public function getRoles()
     {
-		if($this->id<=1) {
-			return array('ROLE_SUPER_ADMIN');
-		} else {
-			return array('ROLE_ADMIN');
-		}
+        if ($this->id <= 1) {
+            return array('ROLE_SUPER_ADMIN');
+        } else {
+            return array('ROLE_ADMIN');
+        }
     }
 
     public function getSalt()
@@ -170,32 +171,31 @@ class User implements UserInterface, \Serializable
         return null;
     }
 
-    public function eraseCredentials() {
-		$this->plainPassword = null;
+    public function eraseCredentials()
+    {
+        $this->plainPassword = null;
     }
 
-	/** @see \Serializable::serialize() */
+    /** @see \Serializable::serialize() */
     public function serialize()
     {
         return serialize(array(
             $this->id,
             $this->username,
-            $this->email,
-            $this->phone,
-            $this->language
+            $this->password
         ));
     }
 
-    /** @see \Serializable::unserialize() */
+    /**
+     * @param $serialized
+     * @see \Serializable::unserialize()
+     */
     public function unserialize($serialized)
     {
         list (
             $this->id,
             $this->username,
-            $this->email,
-            $this->phone,
-            $this->language
-        ) = unserialize($serialized, array('allowed_classes' => false));
+            $this->password
+            ) = unserialize($serialized, array('allowed_classes' => false));
     }
-
 }
