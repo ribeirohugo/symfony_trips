@@ -1,6 +1,8 @@
 <?php namespace App\Tests\Entity;
 
+use App\Entity\Contact;
 use App\Entity\Country;
+use App\Entity\HostingType;
 use App\Entity\Location;
 use App\Entity\Place;
 use App\Entity\PlaceType;
@@ -26,24 +28,25 @@ class PlaceTest extends TestCase {
 
     private const PLACE_LAST_PRICE = 20.3;
 
+    private const PLACE_DRIVE_FILES = "http://teste.domain";
+
+    private const PLACE_STARS = 4.5;
+
+    private const PLACE_HOSTING_TYPE_NAME = "Hosting Type Name";
+
+    private const PLACE_MAIN_CONTACT = "Main Contact";
 
     public function testPlaceName() {
         $place = new Place();
 
+        $place->setId(1);
+        $this->assertEquals(1, $place->getId());
+
         $place->setName(self::PLACE_NAME);
         $this->assertEquals(self::PLACE_NAME, $place->getName());
 
-    }
-
-    public function testPlaceDescription() {
-        $place = new Place();
-
         $place->setDescription(self::PLACE_DESCRIPTION);
         $this->assertEquals(self::PLACE_DESCRIPTION, $place->getDescription());
-    }
-
-    public function testPlaceLocation() {
-        $place = new Place();
 
         $country = new Country(self::COUNTRY_NAME, self::COUNTRY_SLUG);
         $region = new Region(self::REGION_NAME, $country);
@@ -51,50 +54,39 @@ class PlaceTest extends TestCase {
 
         $place->setLocation($location);
         $this->assertEquals($location, $place->getLocation());
-    }
-
-    public function testPlaceTimestamp() {
-        $place = new Place();
 
         $timestamp = new \DateTime();
 
         $place->setTimestamp($timestamp);
         $this->assertEquals($timestamp, $place->getTimestamp());
-    }
 
-    public function testPlaceType() {
         $placeType = new PlaceType(self::PLACE_TYPE_NAME);
-        $place = new Place();
-
         $place->setPlaceType($placeType);
         $this->assertEquals($placeType, $place->getPlaceType());
-    }
-
-    public function testPlaceAddress() {
-        $place = new Place();
 
         $place->setAddress(self::PLACE_ADDRESS);
         $this->assertEquals(self::PLACE_ADDRESS, $place->getAddress());
-    }
-
-    public function testPlaceNegativePoints() {
-        $place = new Place();
 
         $place->setNegativePoints(self::PLACE_NEGATIVE_POINTS);
         $this->assertEquals(self::PLACE_NEGATIVE_POINTS, $place->getNegativePoints());
-    }
-
-    public function testPlacePositivePoints() {
-        $place = new Place();
 
         $place->setPositivePoints(self::PLACE_POSITIVE_POINTS);
         $this->assertEquals(self::PLACE_POSITIVE_POINTS, $place->getPositivePoints());
-    }
-
-    public function testLastPrice() {
-        $place = new Place();
 
         $place->setLastPrice(self::PLACE_LAST_PRICE);
         $this->assertEquals(self::PLACE_LAST_PRICE, $place->getLastPrice());
+
+        $place->setDriveFiles(self::PLACE_DRIVE_FILES);
+        $this->assertEquals(self::PLACE_DRIVE_FILES, $place->getDriveFiles());
+
+        $place->setStars(self::PLACE_STARS);
+        $this->assertEquals(self::PLACE_STARS, $place->getStars());
+
+        $hostingType = new HostingType(self::PLACE_HOSTING_TYPE_NAME);
+        $place->setHostingType($hostingType);
+        $this->assertEquals($hostingType, $place->getHostingType());
+
+        $place->setMainContact(self::PLACE_MAIN_CONTACT);
+        $this->assertEquals(self::PLACE_MAIN_CONTACT, $place->getMainContact());
     }
 }

@@ -10,6 +10,7 @@ class UserTest extends TestCase {
     private const USER_EMAIL = "email@domain.com";
     private const USER_PASSWORD = "password test";
     private const USER_LANGUAGE = "pt";
+    private const USER_PHONE = "910123321";
 
     public function testUserName() {
         $user = new User();
@@ -33,6 +34,9 @@ class UserTest extends TestCase {
         $user->setLanguage(self::USER_LANGUAGE);
         $this->assertEquals(self::USER_LANGUAGE, $user->getLanguage());
 
-
+        $user->setPhone(self::USER_PHONE);
+        $this->assertEquals(self::USER_PHONE, $user->getPhone());
     }
+
+
 }
