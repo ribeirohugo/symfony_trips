@@ -9,6 +9,8 @@ use Doctrine\Persistence\ObjectManager;
 
 class ActivityFixtures extends Fixture implements DependentFixtureInterface
 {
+    public const ACTIVITY_REFERENCE = "Trip to Algarve";
+
     public function load(ObjectManager $manager)
     {
         $activity = new Activity();
@@ -18,6 +20,8 @@ class ActivityFixtures extends Fixture implements DependentFixtureInterface
         $manager->persist($activity);
 
         $manager->flush();
+
+        $this->addReference(self::ACTIVITY_REFERENCE, $activity);
     }
 
     public function getDependencies()

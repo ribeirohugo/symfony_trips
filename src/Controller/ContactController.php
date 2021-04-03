@@ -21,8 +21,12 @@ use Symfony\Component\Translation\Translator;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 class ContactController extends AbstractController {
+
     /**
      * @Route("/admin/contacts", name="contacts")
+     * @param Request $request
+     * @param TranslatorInterface $trans
+     * @return HttpFoundation\Response
      */
     public function indexAction(Request $request, TranslatorInterface $trans)
     {
@@ -36,6 +40,10 @@ class ContactController extends AbstractController {
 
     /**
      * @Route("/admin/contact/new", name="contact_new")
+     * @param Request $request
+     * @param UserPasswordEncoderInterface $passwordEncoder
+     * @param TranslatorInterface $trans
+     * @return RedirectResponse|HttpFoundation\Response
      */
     public function newContact(Request $request, UserPasswordEncoderInterface $passwordEncoder, TranslatorInterface $trans) {
 
@@ -71,6 +79,10 @@ class ContactController extends AbstractController {
 
     /**
      * @Route("/admin/contact/edit/{id}", name="contact_edit")
+     * @param Request $request
+     * @param TranslatorInterface $trans
+     * @param $id
+     * @return RedirectResponse|HttpFoundation\Response
      */
     public function editContact(Request $request, TranslatorInterface $trans, $id) {
 
@@ -108,8 +120,12 @@ class ContactController extends AbstractController {
 
     /**
      * @Route("/admin/contact/delete/{id}", name="contact_delete")
-	 *
-	 * @IsGranted("ROLE_SUPER_ADMIN")
+     *
+     * @IsGranted("ROLE_SUPER_ADMIN")
+     * @param Request $request
+     * @param TranslatorInterface $trans
+     * @param $id
+     * @return RedirectResponse
      */
     public function deleteContact(Request $request, TranslatorInterface $trans, $id) {
 
@@ -136,6 +152,10 @@ class ContactController extends AbstractController {
 
     /**
      * @Route("/admin/contacts/{id}", name="contact_id")
+     * @param Request $request
+     * @param TranslatorInterface $trans
+     * @param $id
+     * @return RedirectResponse|HttpFoundation\Response
      */
     public function idContact(Request $request, TranslatorInterface $trans, $id) {
 		$object=$this->getDoctrine()->getRepository(Contact::class)->find($id);
