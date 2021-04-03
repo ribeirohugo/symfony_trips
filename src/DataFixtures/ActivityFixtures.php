@@ -1,6 +1,4 @@
-<?php
-
-namespace App\DataFixtures;
+<?php namespace App\DataFixtures;
 
 use App\Entity\Activity;
 use Doctrine\Bundle\FixturesBundle\Fixture;
@@ -24,7 +22,6 @@ class ActivityFixtures extends Fixture implements DependentFixtureInterface
         $manager->flush();
 
         $this->addReference(self::ACTIVITY_REFERENCE, $activity);
-
 
         $activity = new Activity();
         $activity->setName(self::ACTIVITY2_NAME);

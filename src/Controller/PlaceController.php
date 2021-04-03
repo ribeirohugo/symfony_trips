@@ -1,5 +1,6 @@
 <?php namespace App\Controller;
 
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation;
@@ -215,5 +216,54 @@ class PlaceController extends AbstractController {
 			'title' => 'Edit Place',
 			'form' => $form->createView()
 		]);
+    }
+
+
+    /**
+     * @Route("/admin/places/delete/{id}", name="place_delete")
+     *
+     * @param TranslatorInterface $trans
+     * @param $id
+     * @return RedirectResponse
+     */
+    public function deletePlace(TranslatorInterface $trans, $id) {
+
+        $object=$this->getDoctrine()->getRepository(Place::class)->find($id);
+
+        //Check if object exists
+        if(empty($object))
+            return $this->redirectToRoute('places');
+
+        if($object->hasContacts()) {
+            $this->addFlash('notice','<p class="alert alert-danger">'.$trans->trans('not_possible_place_has_contacts').'</p>');
+            return $this->redirectToRoute('places');
+        }
+
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->remove($object);
+        $entityManager->flush();
+
+        $this->addFlash('notice','<p class="alert alert-success">'.$trans->trans('place_successfully_removed.').'</p>');
+
+        return $this->redirectToRoute('places');
+    }
+
+    /**
+     * @Route("/admin/place/{id}", name="place_id")
+     * @param TranslatorInterface $trans
+     * @param $id
+     * @return RedirectResponse|Response
+     */
+    public function singleActivity(TranslatorInterface $trans, $id) {
+        $object=$this->getDoctrine()->getRepository(Place::class)->find($id);
+
+        //Check if object exists
+        if(empty($object))
+            return $this->redirectToRoute('places');
+
+        return $this->render('default/place.html.twig', array(
+            'title' => $trans->trans('Place'),
+            'activity' => $object
+        ));
     }
 }

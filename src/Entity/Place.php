@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -121,8 +123,18 @@ class Place
      */
     private $placeType;
 
-	public function __construct() {
+    /**
+     * @ORM\ManyToMany(targetEntity="ContactPlace", inversedBy="places")
+     * @ORM\JoinTable(name="contact_place",
+     *      joinColumns={@ORM\JoinColumn(name="place", referencedColumnName="id")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="contact", referencedColumnName="id")}
+     *      )
+     */
+    private $contacts;
+
+    public function __construct() {
 		$this->timestamp = new \DateTime();
+		$this->contacts = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -293,4 +305,23 @@ class Place
         return $this;
     }
 
+
+    /**
+     * @return Collection|Contact[]
+     */
+    public function getContacts(): Collection
+    {
+        return $this->contacts;
+    }
+
+    public function hasContacts() {
+        return (bool) $this->getContacts()->count();
+    }
+
+    public function addContact(Contact $contact): self
+    {
+        $this->contacts->add($contact);
+
+        return $this;
+    }
 }

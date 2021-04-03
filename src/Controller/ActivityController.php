@@ -159,5 +159,4 @@ class ActivityController extends AbstractController {
 			'activity' => $object
         ));
     }
-
 }

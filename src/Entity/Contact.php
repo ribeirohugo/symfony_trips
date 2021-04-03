@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -80,8 +81,14 @@ class Contact
      */
     private $activity;
 
+    /**
+     * @ORM\ManyToMany(targetEntity="Place", mappedBy="contacts")
+     */
+    private $places;
+
 	public function __construct() {
 		$this->timestamp = new \DateTime();
+		$this->places = new ArrayCollection();
     }
 
     public function getId(): ?int
