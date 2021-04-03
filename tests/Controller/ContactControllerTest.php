@@ -6,8 +6,11 @@ use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 class ContactControllerTest extends WebTestCase
 {
-    private const URI_CONTACTS = "";
-    private const URI_CONTACt_NEW = "";
+    private const URI_CONTACTS = "/admin/contacts";
+    private const URI_CONTACT_NEW = "/admin/contact/new";
+    private const URI_CONTACT_EDIT = "/admin/contact/edit/";
+    private const URI_CONTACT_DELETE = "/admin/contact/delete/";
+    private const URI_CONTACT_ID = "/admin/contacts/";
 
     private const USER_EMAIL = "test@domain.com";
 
@@ -15,7 +18,7 @@ class ContactControllerTest extends WebTestCase
     {
         $client = static::createClient();
 
-        $client->request('GET', '/admin/contacts');
+        $client->request('GET', self::URI_CONTACTS);
         $this->assertEquals(302, $client->getResponse()->getStatusCode());
 
         //Testing user from fixtures
@@ -25,7 +28,7 @@ class ContactControllerTest extends WebTestCase
         $client->loginUser($testUser);
 
         // User logged in
-        $client->request('GET', '/admin/contacts');
+        $client->request('GET', self::URI_CONTACTS);
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
     }
 
@@ -33,7 +36,7 @@ class ContactControllerTest extends WebTestCase
     {
         $client = static::createClient();
 
-        $client->request('GET', '/admin/contact/new');
+        $client->request('GET', self::URI_CONTACT_NEW);
         $this->assertEquals(302, $client->getResponse()->getStatusCode());
 
         //Testing user from fixtures
@@ -43,11 +46,11 @@ class ContactControllerTest extends WebTestCase
         $client->loginUser($testUser);
 
         // User logged in
-        $client->request('GET', '/admin/contact/new');
+        $client->request('GET', self::URI_CONTACT_NEW);
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
     }
 
-    public function testContactId()
+    public function testEditContact()
     {
         $client = static::createClient();
 
@@ -55,7 +58,7 @@ class ContactControllerTest extends WebTestCase
         $testContact = $contactRepository->findOneBy([]);
         $id = $testContact->getId();
 
-        $client->request('GET', '/admin/contacts/'.$id);
+        $client->request('GET', self::URI_CONTACT_EDIT.$id);
         $this->assertEquals(302, $client->getResponse()->getStatusCode());
         $this->assertTrue($client->getResponse()->isRedirect('/'));
 
@@ -66,11 +69,66 @@ class ContactControllerTest extends WebTestCase
         $client->loginUser($testUser);
 
         // User logged in
-        $client->request('GET', '/admin/contacts/'.$id);
+        $client->request('GET', self::URI_CONTACT_EDIT.$id);
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
 
-        $client->request('GET', '/admin/contacts/0');
+        $client->request('GET', self::URI_CONTACT_EDIT.'0');
         $this->assertEquals(302, $client->getResponse()->getStatusCode());
-        $this->assertTrue($client->getResponse()->isRedirect('/admin/contacts'));
+        $this->assertTrue($client->getResponse()->isRedirect(self::URI_CONTACTS));
+    }
+
+    public function testDeleteContact()
+    {
+        $client = static::createClient();
+
+        $contactRepository = static::$container->get(ContactRepository::class);
+        $testContact = $contactRepository->findOneBy([]);
+        $id = $testContact->getId();
+
+        $client->request('GET', self::URI_CONTACT_DELETE.$id);
+        $this->assertEquals(302, $client->getResponse()->getStatusCode());
+        $this->assertTrue($client->getResponse()->isRedirect('/'));
+
+        //Testing user from fixtures
+        $userRepository = static::$container->get(UserRepository::class);
+        $testUser = $userRepository->findOneByEmail(self::USER_EMAIL);
+
+        $client->loginUser($testUser);
+
+        // User logged in
+        $client->request('GET', self::URI_CONTACT_DELETE.$id);
+        $this->assertEquals(302, $client->getResponse()->getStatusCode());
+        $this->assertTrue($client->getResponse()->isRedirect(self::URI_CONTACTS));
+
+        $client->request('GET', self::URI_CONTACT_DELETE.'0');
+        $this->assertEquals(302, $client->getResponse()->getStatusCode());
+        $this->assertTrue($client->getResponse()->isRedirect(self::URI_CONTACTS));
+    }
+
+    public function testContactId()
+    {
+        $client = static::createClient();
+
+        $contactRepository = static::$container->get(ContactRepository::class);
+        $testContact = $contactRepository->findOneBy([]);
+        $id = $testContact->getId();
+
+        $client->request('GET', self::URI_CONTACT_ID.$id);
+        $this->assertEquals(302, $client->getResponse()->getStatusCode());
+        $this->assertTrue($client->getResponse()->isRedirect('/'));
+
+        //Testing user from fixtures
+        $userRepository = static::$container->get(UserRepository::class);
+        $testUser = $userRepository->findOneByEmail(self::USER_EMAIL);
+
+        $client->loginUser($testUser);
+
+        // User logged in
+        $client->request('GET', self::URI_CONTACT_ID.$id);
+        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+
+        $client->request('GET', self::URI_CONTACT_ID.'0');
+        $this->assertEquals(302, $client->getResponse()->getStatusCode());
+        $this->assertTrue($client->getResponse()->isRedirect(self::URI_CONTACTS));
     }
 }

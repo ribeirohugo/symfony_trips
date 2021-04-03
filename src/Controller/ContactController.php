@@ -41,11 +41,10 @@ class ContactController extends AbstractController {
     /**
      * @Route("/admin/contact/new", name="contact_new")
      * @param Request $request
-     * @param UserPasswordEncoderInterface $passwordEncoder
      * @param TranslatorInterface $trans
      * @return RedirectResponse|HttpFoundation\Response
      */
-    public function newContact(Request $request, UserPasswordEncoderInterface $passwordEncoder, TranslatorInterface $trans) {
+    public function newContact(Request $request, TranslatorInterface $trans) {
 
         $object = new Contact;
 		
@@ -90,7 +89,7 @@ class ContactController extends AbstractController {
 
 		//Check if object exists
 		if(empty($object))
-			return $this->redirectToRoute('admin');
+			return $this->redirectToRoute('contacts');
 
 		$options = ['submit'=>$trans->trans('Edit')];
 		$form = $this->createForm(ContactType::class, $object, $options);
@@ -135,19 +134,13 @@ class ContactController extends AbstractController {
 		if(empty($object))
 			return $this->redirectToRoute('contacts');
 
-		if($object->hasActions()) {
-			$this->addFlash('notice','<p class="alert alert-danger">'.$trans->trans('not_possible_contact_has_actions').'</p>');
-			return $this->redirectToRoute('contacts');
-		}
-
 		$entityManager = $this->getDoctrine()->getManager();
 		$entityManager->remove($object);
 		$entityManager->flush();
 
-		$this->addFlash('notice','<p class="alert alert-success">'.$trans->trans('Contact successfully removed.').'</p>');	
-		
-		$referer = $request->server->get('HTTP_REFERER');
-		return new RedirectResponse($referer);
+		$this->addFlash('notice','<p class="alert alert-success">'.$trans->trans('Contact successfully removed.').'</p>');
+
+        return $this->redirectToRoute('contacts');
     }
 
     /**
