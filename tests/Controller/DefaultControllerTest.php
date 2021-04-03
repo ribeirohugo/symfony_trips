@@ -1,5 +1,4 @@
-<?php // tests/Controller/DefaultControllerTest.php
-namespace App\Tests\Controller;
+<?php namespace App\Tests\Controller;
 
 use App\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
@@ -30,16 +29,18 @@ class DefaultControllerTest extends WebTestCase
 
         //Testing user from fixtures
         $userRepository = static::$container->get(UserRepository::class);
-        $testUser = $userRepository->findOneByEmail('ribeirohugo.op@gmail.com');
+        $testUser = $userRepository->findOneByEmail('test@domain.com');
 
         $client->loginUser($testUser);
 
-        // user is now logged in, so you can test protected resources
+        // User logged in
         $client->request('GET', '/admin');
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
         //$this->assertResponseIsSuccessful();
         //$this->assertSelectorTextContains('h1', 'Hello Username!');
+
+        $client->request('GET', '/');
+        $this->assertEquals(302, $client->getResponse()->getStatusCode());
     }
 }
 
-?>

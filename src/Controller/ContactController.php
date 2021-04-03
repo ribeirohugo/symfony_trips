@@ -162,7 +162,7 @@ class ContactController extends AbstractController {
 
 		//Check if object exists
 		if(empty($object))
-			return $this->redirectToRoute('admin');
+			return $this->redirectToRoute('contacts');
 
         return $this->render('default/contact.html.twig', array(
 			'title' => $trans->trans('Contact'),
