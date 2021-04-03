@@ -24,8 +24,9 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 class PlaceController extends AbstractController {
     /**
      * @Route("/admin/places", name="places")
+     * @return Response
      */
-    public function places(Request $request)
+    public function places()
     {
 		$objects=$this->getDoctrine()->getRepository(Place::class)->findAll();
 
@@ -37,8 +38,9 @@ class PlaceController extends AbstractController {
 
     /**
      * @Route("/admin/places/bars", name="bars")
+     * @return Response
      */
-    public function bars(Request $request)
+    public function bars()
     {
 		$place_type=$this->getDoctrine()->getRepository(PlaceType::class)->findOneByName('Bar');
 
@@ -53,7 +55,7 @@ class PlaceController extends AbstractController {
     /**
      * @Route("/admin/places/beaches", name="beaches")
      */
-    public function beaches(Request $request)
+    public function beaches()
     {
 		$place_type=$this->getDoctrine()->getRepository(PlaceType::class)->findOneByName('Beach');
 
@@ -68,7 +70,7 @@ class PlaceController extends AbstractController {
     /**
      * @Route("/admin/places/clubs", name="clubs")
      */
-    public function clubs(Request $request)
+    public function clubs()
     {
 		$place_type=$this->getDoctrine()->getRepository(PlaceType::class)->findOneByName('Club');
 
@@ -83,7 +85,7 @@ class PlaceController extends AbstractController {
     /**
      * @Route("/admin/places/hostings", name="hostings")
      */
-    public function hostings(Request $request)
+    public function hostings()
     {
 		$place_type=$this->getDoctrine()->getRepository(PlaceType::class)->findOneByName('Hosting');
 
@@ -98,7 +100,7 @@ class PlaceController extends AbstractController {
     /**
      * @Route("/admin/places/monuments", name="monuments")
      */
-    public function monuments(Request $request)
+    public function monuments()
     {
 		$place_type=$this->getDoctrine()->getRepository(PlaceType::class)->findOneByName('Monument');
 
@@ -113,7 +115,7 @@ class PlaceController extends AbstractController {
     /**
      * @Route("/admin/places/museums", name="museums")
      */
-    public function museums(Request $request)
+    public function museums()
     {
 		$place_type=$this->getDoctrine()->getRepository(PlaceType::class)->findOneByName('Museum');
 
@@ -128,7 +130,7 @@ class PlaceController extends AbstractController {
     /**
      * @Route("/admin/places/restaurants", name="restaurants")
      */
-    public function restaurants(Request $request)
+    public function restaurants()
     {
 		$place_type=$this->getDoctrine()->getRepository(PlaceType::class)->findOneByName('Restaurant');
 
@@ -142,6 +144,9 @@ class PlaceController extends AbstractController {
 
     /**
      * @Route("/admin/places/new", name="places_new")
+     * @param Request $request
+     * @param TranslatorInterface $t
+     * @return HttpFoundation\RedirectResponse|Response
      */
     public function placesNew(Request $request, TranslatorInterface $t)
     {
@@ -177,6 +182,10 @@ class PlaceController extends AbstractController {
 
     /**
      * @Route("/admin/places/edit/{id}", name="places_edit")
+     * @param Request $request
+     * @param TranslatorInterface $t
+     * @param $id
+     * @return HttpFoundation\RedirectResponse|Response
      */
     public function placesEdit(Request $request, TranslatorInterface $t, $id)
     {
