@@ -2,7 +2,7 @@
 
 use App\Entity\TeamBuilding;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Doctrine\Common\Persistence\ManagerRegistry;
+use Doctrine\Persistence\ManagerRegistry;
 
 /**
  * @method TeamBuilding|null find($id, $lockMode = null, $lockVersion = null)

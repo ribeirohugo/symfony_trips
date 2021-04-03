@@ -1,5 +1,4 @@
-<?php // src/Controller/SecurityController.php
-namespace App\Controller;
+<?php namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -10,6 +9,8 @@ class SecurityController extends AbstractController
 {
     /**
      * @Route("/", name="login")
+     * @param AuthenticationUtils $authenticationUtils
+     * @return Response
      */
     public function login(AuthenticationUtils $authenticationUtils): Response
     {

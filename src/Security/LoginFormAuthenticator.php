@@ -1,5 +1,4 @@
-<?php // src/Security/LoginFormAuthenticator.php
-namespace App\Security;
+<?php namespace App\Security;
 
 use App\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;

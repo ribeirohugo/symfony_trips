@@ -1,20 +1,15 @@
 <?php namespace App\Controller;
 
 use Symfony\Component\HttpFoundation\Response;
-
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 
 use App\Entity\Activity;
 use App\Form\ActivityType;
-use App\Repository\ActivityRepository;
 
 //Translation
-use Symfony\Component\Translation\Translator;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 //Annotations to define role permissions
@@ -25,10 +20,9 @@ class ActivityController extends AbstractController {
 
     /**
      * @Route("/admin/activities", name="activities")
-     * @param Request $request
      * @return Response
      */
-    public function indexAction(Request $request)
+    public function indexAction()
     {
 		$objects=$this->getDoctrine()->getRepository(Activity::class)->findAll();
 
@@ -121,12 +115,11 @@ class ActivityController extends AbstractController {
      * @Route("/admin/activity/delete/{id}", name="activity_delete")
      *
      * @IsGranted("ROLE_SUPER_ADMIN")
-     * @param Request $request
      * @param TranslatorInterface $trans
      * @param $id
      * @return RedirectResponse
      */
-    public function deleteActivity(Request $request, TranslatorInterface $trans, $id) {
+    public function deleteActivity(TranslatorInterface $trans, $id) {
 
 		$object=$this->getDoctrine()->getRepository(Activity::class)->find($id);
 
@@ -150,12 +143,11 @@ class ActivityController extends AbstractController {
 
     /**
      * @Route("/admin/activity/{id}", name="activity_id")
-     * @param Request $request
      * @param TranslatorInterface $trans
      * @param $id
      * @return RedirectResponse|Response
      */
-    public function singleActivity(Request $request, TranslatorInterface $trans, $id) {
+    public function singleActivity(TranslatorInterface $trans, $id) {
 		$object=$this->getDoctrine()->getRepository(Activity::class)->find($id);
 
 		//Check if object exists

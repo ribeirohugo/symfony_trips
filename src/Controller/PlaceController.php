@@ -1,8 +1,6 @@
 <?php namespace App\Controller;
 
 use Symfony\Component\HttpFoundation\Response;
-
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation;
 use Symfony\Component\Routing\Annotation\Route;
@@ -11,14 +9,9 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 //Places classes
 use App\Entity\Place;
 use App\Form\PlaceTypeType;
-use App\Repository\PlaceRepository;
-
-//Places classes
 use App\Entity\PlaceType;
-use App\Repository\PlaceTypeRepository;
 
 //Translation
-use Symfony\Component\Translation\Translator;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 class PlaceController extends AbstractController {

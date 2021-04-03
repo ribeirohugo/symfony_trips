@@ -78,7 +78,6 @@ class ActivityControllerTest extends WebTestCase
         $this->assertTrue($client->getResponse()->isRedirect(self::URI_ACTIVITIES));
     }
 
-
     public function testDeleteActivity()
     {
         $client = static::createClient();

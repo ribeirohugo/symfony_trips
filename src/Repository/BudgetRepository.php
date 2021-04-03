@@ -2,7 +2,7 @@
 
 use App\Entity\Budget;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Doctrine\Common\Persistence\ManagerRegistry;
+use Doctrine\Persistence\ManagerRegistry;
 
 /**
  * @method Budget|null find($id, $lockMode = null, $lockVersion = null)

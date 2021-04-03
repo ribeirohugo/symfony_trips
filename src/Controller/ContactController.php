@@ -4,14 +4,10 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 
 use App\Entity\Contact;
 use App\Form\ContactType;
-use App\Repository\ContactRepository;
-
-use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
-use Symfony\Component\HttpFoundation\RedirectResponse;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
@@ -28,7 +24,7 @@ class ContactController extends AbstractController {
      * @param TranslatorInterface $trans
      * @return HttpFoundation\Response
      */
-    public function indexAction(Request $request, TranslatorInterface $trans)
+    public function indexAction(TranslatorInterface $trans)
     {
 		$objects=$this->getDoctrine()->getRepository(Contact::class)->findAll();
 
@@ -121,12 +117,11 @@ class ContactController extends AbstractController {
      * @Route("/admin/contact/delete/{id}", name="contact_delete")
      *
      * @IsGranted("ROLE_SUPER_ADMIN")
-     * @param Request $request
      * @param TranslatorInterface $trans
      * @param $id
      * @return RedirectResponse
      */
-    public function deleteContact(Request $request, TranslatorInterface $trans, $id) {
+    public function deleteContact(TranslatorInterface $trans, $id) {
 
 		$object=$this->getDoctrine()->getRepository(Contact::class)->find($id);
 
@@ -145,12 +140,11 @@ class ContactController extends AbstractController {
 
     /**
      * @Route("/admin/contacts/{id}", name="contact_id")
-     * @param Request $request
      * @param TranslatorInterface $trans
      * @param $id
      * @return RedirectResponse|HttpFoundation\Response
      */
-    public function idContact(Request $request, TranslatorInterface $trans, $id) {
+    public function idContact(TranslatorInterface $trans, $id) {
 		$object=$this->getDoctrine()->getRepository(Contact::class)->find($id);
 
 		//Check if object exists
