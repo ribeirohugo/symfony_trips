@@ -55,7 +55,4 @@ class ActivityType
 
         return $this;
     }
-
-
-
 }

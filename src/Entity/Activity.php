@@ -62,6 +62,11 @@ class Activity
      */
     private $driveFiles;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Contact", mappedBy="activity")
+     */
+    private $contacts;
+
     public function __construct()
     {
         $this->timestamp = new \DateTime();
@@ -135,6 +140,25 @@ class Activity
     public function setDriveFiles(?string $driveFiles): self
     {
         $this->driveFiles = $driveFiles;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Contact[]
+     */
+    public function getContacts(): Collection
+    {
+        return $this->contacts;
+    }
+
+    public function hasContacts() {
+        return (bool) $this->getContacts()->count();
+    }
+
+    public function addContact(Contact $contact): self
+    {
+        $this->contacts->add($contact);
 
         return $this;
     }

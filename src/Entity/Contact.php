@@ -73,7 +73,7 @@ class Contact
     private $skype;
 
     /**
-     * @var \Activity
+     * @var Activity
      *
      * @ORM\ManyToOne(targetEntity="Activity")
      * @ORM\JoinColumns({
